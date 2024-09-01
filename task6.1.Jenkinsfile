@@ -81,7 +81,12 @@ pipeline {
         stage('Deploy to Production') {
             steps {
                 echo "Stage 7: Deploy the application to a production server: ${env.PRODUCTION_SERVER} by AWS CLI."
-                echo "Tool: AWS CLI."
+                echo "Tool: AWS CLI"
+            }
+        }
+        stage('Complete') {
+            steps {
+                echo "Successful!"
             }
         }
     }

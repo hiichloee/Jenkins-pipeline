@@ -24,24 +24,14 @@ pipeline {
             post {
                 // Send email notification with test results
                 success {
-                    script {
-                        def logContent = currentBuild.rawBuild.getLog(100).join('\n')
-                        writeFile file: 'unit_integration_tests_log.txt', text: logContent
-                    }
                     mail to: "${env.EMAIL_RECIPIENT}",
                         subject: "Unit and Integration Tests Successful!",
-                        body: "Good news, the unit and integration tests completed successfully!",
-                        attachmentsPattern: 'unit_integration_tests_log.txt'
+                        body: "Good news, the unit and integration tests completed successfully!"
                 }
                 failure {
-                    script {
-                        def logContent = currentBuild.rawBuild.getLog(100).join('\n')
-                        writeFile file: 'unit_integration_tests_log.txt', text: logContent
-                    }
                     mail to: "${env.EMAIL_RECIPIENT}",
                         subject: "Unit and Integration Tests Failed.",
-                        body: "Unfortunately, the unit and integration tests failed. Please check the logs for details.",
-                        attachmentsPattern: 'unit_integration_tests_log.txt'
+                        body: "Unfortunately, the unit and integration tests failed. Please check the logs for details."
                 }
             }
 
@@ -62,24 +52,14 @@ pipeline {
             post {
                 // Send email notification with test results
                 success {
-                    script {
-                        def logContent = currentBuild.rawBuild.getLog(100).join('\n')
-                        writeFile file: 'security_scan_log.txt', text: logContent
-                    }
                     mail to: "${env.EMAIL_RECIPIENT}",
                         subject: "Security Scan Successful!",
-                        body: "Good news, the security scan completed successfully!",
-                        attachmentsPattern: 'security_scan_log.txt'
+                        body: "Good news, the security scan completed successfully!"
                 }
                 failure {
-                    script {
-                        def logContent = currentBuild.rawBuild.getLog(100).join('\n')
-                        writeFile file: 'security_scan_log.txt', text: logContent
-                    }
                     mail to: "${env.EMAIL_RECIPIENT}",
                         subject: "Security Scan Failed.",
-                        body: "Unfortunately, the security scan failed. Please check the logs for details.",
-                        attachmentsPattern: 'security_scan_log.txt'
+                        body: "Unfortunately, the security scan failed. Please check the logs for details."
                 }
             }
         }

@@ -56,16 +56,22 @@ pipeline {
                 echo "Tool: OWASP Dependency-Check"
             }
             post {
-                // Send email notification with test results
+                // Send email notification with scan results
                 success {
-                    mail to: "${env.EMAIL_RECIPIENT}",
-                        subject: "Security Scan Successful!",
-                        body: "Good news, the security scan completed successfully!"
+                    script {
+                        def logUrl = "${env.BUILD_URL}consoleText"
+                        mail to: "${env.EMAIL_RECIPIENT}",
+                            subject: "Security Scan Successful!",
+                            body: "Good news, the security scan completed successfully! \nCheck the logs here: ${logUrl}"
+                    }
                 }
                 failure {
-                    mail to: "${env.EMAIL_RECIPIENT}",
-                        subject: "Security Scan Failed.",
-                        body: "Unfortunately, the security scan failed. Please check the logs for details."
+                    script {
+                        def logUrl = "${env.BUILD_URL}consoleText"
+                        mail to: "${env.EMAIL_RECIPIENT}",
+                            subject: "Security Scan Failed.",
+                            body: "Unfortunately, the security scan failed. Please check the logs for details: ${logUrl}"
+                    }
                 }
             }
 
@@ -91,11 +97,7 @@ pipeline {
                 echo "Tool: AWS CLI"
             }
         }
-        stage('Complete') {
-            steps {
-                echo "Successful!"
-            }
-        }
+
     }
     
 }

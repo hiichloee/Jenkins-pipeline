@@ -52,14 +52,21 @@ pipeline {
             post {
                 // Send email notification with test results
                 success {
-                    mail to: "${env.EMAIL_RECIPIENT}",
+
+                    emailext (
+                        to: "${env.EMAIL_RECIPIENT}",
                         subject: "Security Scan Successful!",
-                        body: "Good news, the security scan completed successfully!"
+                        body: "Good news, the security scan completed successfully!",
+                        attachLog: true // 附上构建日志
+                    )
                 }
                 failure {
-                    mail to: "${env.EMAIL_RECIPIENT}",
+                    emailext (
+                        to: "${env.EMAIL_RECIPIENT}",
                         subject: "Security Scan Failed.",
-                        body: "Unfortunately, the security scan failed. Please check the logs for details."
+                        body: "Unfortunately, the security scan failed. Please check the logs for details.",
+                        attachLog: true // 附上构建日志
+                    )
                 }
             }
         }

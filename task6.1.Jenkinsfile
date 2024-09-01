@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        EMAIL_RECIPIENT = 's222113273@deakin.edu.au'
+        EMAIL_RECIPIENT = 'chloe.xibei.cheng@gmail.com'
         STAGING_SERVER = 'staging-server-address'
         PRODUCTION_SERVER = 'production-server-address'
     }

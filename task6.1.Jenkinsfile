@@ -50,22 +50,13 @@ pipeline {
                 echo "Tool: OWASP Dependency-Check"
             }
            post {
-                // Send email notification with test results
-                success {
-
+                always {
+                    // 发送安全扫描结果通知邮件
                     emailext (
-                        to: "${EMAIL_RECIPIENT}",
-                        subject: "Security Scan Successful!",
-                        body: "Good news, the security scan completed successfully!",
-                        attachLog: true 
-                    )
-                }
-                failure {
-                    emailext (
-                        to: "${EMAIL_RECIPIENT}",
-                        subject: "Security Scan Failed.",
-                        body: "Unfortunately, the security scan failed. Please check the logs for details.",
-                        attachLog: true
+                        to: "${env.EMAIL_RECIPIENT}",
+                        subject: "Security Scan Results",
+                        body: "安全扫描已完成。",
+                        attachLog: true // 附上构建日志
                     )
                 }
             }

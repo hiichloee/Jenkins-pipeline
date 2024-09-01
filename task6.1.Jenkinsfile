@@ -22,19 +22,22 @@ pipeline {
             }
 
             post {
+                // Send email notification with test results
                 success {
-                    archiveArtifacts artifacts: '**/test.log', allowEmptyArchive: true
-                    def logUrl = "${env.BUILD_URL}consoleText"
-                    mail to: "${env.EMAIL_RECIPIENT}",
-                        subject: "Unit and Integration Tests Successful!",
-                        body: "Good news, the unit and integration tests completed successfully! \nCheck the logs here: ${logUrl}"
+                    script {
+                        def logUrl = "${env.BUILD_URL}consoleText"
+                        mail to: "${env.EMAIL_RECIPIENT}",
+                            subject: "Unit and Integration Tests Successful!",
+                            body: "Good news, the unit and integration tests completed successfully! \nCheck the logs here: ${logUrl}"
+                    }
                 }
                 failure {
-                    archiveArtifacts artifacts: '**/test.log', allowEmptyArchive: true
-                    def logUrl = "${env.BUILD_URL}consoleText"
-                    mail to: "${env.EMAIL_RECIPIENT}",
-                        subject: "Unit and Integration Tests Failed.",
-                        body: "Unfortunately, the unit and integration tests failed. Please check the logs for details: ${logUrl}"
+                    script {
+                        def logUrl = "${env.BUILD_URL}consoleText"
+                        mail to: "${env.EMAIL_RECIPIENT}",
+                            subject: "Unit and Integration Tests Failed.",
+                            body: "Unfortunately, the unit and integration tests failed. Please check the logs for details: ${logUrl}"
+                    }
                 }
             }
 

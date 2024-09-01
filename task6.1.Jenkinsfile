@@ -52,7 +52,7 @@ pipeline {
 
         stage('Security Scan') {
             steps {
-                echo "Stage 4: Perform OWASP Dependency-Check on the code using a tool to identify any vulnerabilities."
+                echo "Stage 4: Perform a security scan on the code using OWASP Dependency-Check to identify any vulnerabilities."
                 echo "Tool: OWASP Dependency-Check"
             }
             post {

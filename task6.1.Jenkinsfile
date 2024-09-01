@@ -49,23 +49,23 @@ pipeline {
                 echo "Stage 4: Perform OWASP Dependency-Check on the code using a tool to identify any vulnerabilities."
                 echo "Tool: OWASP Dependency-Check"
             }
-            post {
+           post {
                 // Send email notification with test results
                 success {
 
                     emailext (
-                        to: "${env.EMAIL_RECIPIENT}",
+                        to: "${EMAIL_RECIPIENT}",
                         subject: "Security Scan Successful!",
                         body: "Good news, the security scan completed successfully!",
-                        attachLog: true // 附上构建日志
+                        attachLog: true 
                     )
                 }
                 failure {
                     emailext (
-                        to: "${env.EMAIL_RECIPIENT}",
+                        to: "${EMAIL_RECIPIENT}",
                         subject: "Security Scan Failed.",
                         body: "Unfortunately, the security scan failed. Please check the logs for details.",
-                        attachLog: true // 附上构建日志
+                        attachLog: true
                     )
                 }
             }

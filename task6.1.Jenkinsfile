@@ -53,7 +53,7 @@ pipeline {
                 always {
                     // 发送安全扫描结果通知邮件
                     emailext (
-                        to: "${env.EMAIL_RECIPIENT}",
+                        to: "${EMAIL_RECIPIENT}",
                         subject: "Security Scan Results",
                         body: "安全扫描已完成。",
                         attachLog: true // 附上构建日志

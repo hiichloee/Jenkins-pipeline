@@ -61,6 +61,7 @@ pipeline {
                         subject: "Security Scan Failed.",
                         body: "Unfortunately, the security scan failed. Please check the logs for details."
                 }
+            }
 
         }
 

@@ -98,11 +98,6 @@ pipeline {
             }
         }
 
-        stage('Test Complete') {
-            steps {
-                echo "Successful!!"
-            }
-        }
 
     }
     
